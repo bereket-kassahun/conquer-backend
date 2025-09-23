@@ -4,6 +4,7 @@ import { Server, Socket } from 'socket.io';
 import { Player } from './constants/player';
 import { Payload } from './constants/payload'
 import { giveDeciderCards } from './initiation';
+import { parseJson } from './utils/parser';
 
 const app: Express = express();
 const server: http.Server = http.createServer(app);
@@ -20,12 +21,12 @@ app.get('/', (req: Request, res: Response) => {
 
 app.get('/initiate', (req: Request, res: Response) => {
   if(gameStarted){
-    res.send('Game already started')
+    res.send(JSON.stringify(players));
   }else{
     gameStarted = true;
     const numberOfPlayers = Number(req.query.numberOfPlayers) || 2;
     players = giveDeciderCards(numberOfPlayers);
-    res.send('Initiated The game 🚀');
+    res.send(JSON.stringify(players));
   }
 });
 
@@ -50,7 +51,7 @@ io.on('connection', (socket: Socket) => {
   // });
 
   socket.on('player1', (msg: string) => {
-    const payload: Payload = JSON.parse(msg);
+    const payload: Payload = parseJson(msg);
     console.log('Message:', msg);
     io.emit('message', msg);
   });
