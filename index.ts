@@ -26,9 +26,9 @@ app.get('initiate', (req: Request, res: Response) => {
     gameStarted = true;
     const numberOfPlayers = Number(req.query.numberOfPlayers) || 3;
     players = giveDeciderCards(numberOfPlayers);
-    io.emit("player1", players[0]);
-    io.emit("player2", players[1]);
-    io.emit("player3", players[2]);
+    // io.emit("player1", players[0]);
+    // io.emit("player2", players[1]);
+    // io.emit("player3", players[2]);
     console.log('players', players);
     res.send(JSON.stringify(players));
     // res.send('initiated the game 🚀');
