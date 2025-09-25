@@ -24,8 +24,9 @@ app.get('/initiate', (req: Request, res: Response) => {
     res.send(JSON.stringify(players));
   }else{
     gameStarted = true;
-    const numberOfPlayers = Number(req.query.numberOfPlayers) || 2;
+    const numberOfPlayers = Number(req.query.numberOfPlayers) || 3;
     players = giveDeciderCards(numberOfPlayers);
+    console.log('players', players);
     res.send(JSON.stringify(players));
   }
 });
@@ -51,19 +52,22 @@ io.on('connection', (socket: Socket) => {
   // });
 
   socket.on('player1', (msg: string) => {
-    const payload: Payload = parseJson(msg);
+    // const payload: Payload = parseJson(msg);
+    const player = players[0];
     console.log('Message:', msg);
-    io.emit('message', msg);
+    io.emit('message', JSON.stringify(player));
   });
 
   socket.on('player2', (msg: string) => {
+    const player = players[1];
     console.log('Message:', msg);
-    io.emit('message', msg);
+    io.emit('message', JSON.stringify(player));
   });
 
   socket.on('player3', (msg: string) => {
+    const player = players[2];
     console.log('Message:', msg);
-    io.emit('message', msg);
+    io.emit('message', JSON.stringify(player));
   });
 
   socket.on('player4', (msg: string) => {
