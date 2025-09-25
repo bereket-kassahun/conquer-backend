@@ -19,7 +19,7 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Socket.io server is running 🚀');
 });
 
-app.get('/initiate', (req: Request, res: Response) => {
+app.get('initiate', (req: Request, res: Response) => {
   if(gameStarted){
     res.send(JSON.stringify(players));
   }else{
@@ -31,6 +31,7 @@ app.get('/initiate', (req: Request, res: Response) => {
     io.emit("player3", players[2]);
     console.log('players', players);
     res.send(JSON.stringify(players));
+    // res.send('initiated the game 🚀');
   }
 });
 
