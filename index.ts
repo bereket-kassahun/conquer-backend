@@ -15,11 +15,11 @@ const io: Server = new Server(server, {
 let players: Player[] = [];
 let gameStarted: boolean = false;
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Socket.io server is running 🚀');
-});
+// app.get('/', (req: Request, res: Response) => {
+//   res.send('Socket.io server is running 🚀');
+// });
 
-app.get('initiate', (req: Request, res: Response) => {
+app.get('/initiate', (req: Request, res: Response) => {
   if(gameStarted){
     res.send(JSON.stringify(players));
   }else{
