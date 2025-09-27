@@ -12,34 +12,6 @@ const io: Server = new Server(server, {
   cors: { origin: '*' } // allow all origins for testing
 });
 
-let players: Player[] = [];
-let gameStarted: boolean = false;
-
-// app.get('/', (req: Request, res: Response) => {
-//   res.send('Socket.io server is running 🚀');
-// });
-
-app.get('/initiate', (req: Request, res: Response) => {
-  if(gameStarted){
-    res.send(JSON.stringify(players));
-  }else{
-    gameStarted = true;
-    const numberOfPlayers = Number(req.query.numberOfPlayers) || 3;
-    players = giveDeciderCards(numberOfPlayers);
-    // io.emit("player1", players[0]);
-    // io.emit("player1", players[1]);
-    // io.emit("player1", players[2]);
-    console.log('players', players);
-    res.send(JSON.stringify(players));
-  }
-});
-
-app.get('/stop', (req: Request, res: Response) => {
-  gameStarted = false;
-  players = [];
-  res.send('Game stopped');
-});
-
 io.on('connection', (socket: Socket) => {
   console.log('User connected:', socket.id);
   socket.emit('welcome', 'Hello from server!');
@@ -81,6 +53,34 @@ io.on('connection', (socket: Socket) => {
   socket.on('disconnect', () => {
     console.log('User disconnected:', socket.id);
   });
+});
+
+app.get('/', (req: Request, res: Response) => {
+  res.send('Socket.io server is running 🚀');
+});
+
+let players: Player[] = [];
+let gameStarted: boolean = false;
+
+app.get('/stop', (req: Request, res: Response) => {
+  gameStarted = false;
+  players = [];
+  res.send('Game stopped');
+});
+
+app.get('/initiate', (req: Request, res: Response) => {
+  if(gameStarted){
+    res.send(JSON.stringify(players));
+  }else{
+    gameStarted = true;
+    const numberOfPlayers = Number(req.query.numberOfPlayers) || 3;
+    players = giveDeciderCards(numberOfPlayers);
+    // io.emit("player1", players[0]);
+    // io.emit("player1", players[1]);
+    // io.emit("player1", players[2]);
+    console.log('players', players);
+    res.send(JSON.stringify(players));
+  }
 });
 
 const port: string | number = process.env.PORT || 3000;
