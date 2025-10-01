@@ -1,6 +1,5 @@
 services:
-
-* type: web_service
+  type: web_service
   name: my-socketio-express-app
   env: node
   plan: free
@@ -9,34 +8,3 @@ services:
   buildCommand: npm install
   startCommand: npm start
   envVars:
-
-  * key: NODE_ENV
-    value: production
-  * key: SOCKET_PATH
-    value: /socket.io
-
-  # Optional: health check path (adjust to a valid route in your app)
-
-  healthCheckPath: /health
-
-  # If you want persistent logs / custom instance type, change plan/instanceType
-
-  instanceType: starter
-
-  # Optional: Add a disk if your app needs it (uncomment to use)
-
-  # disk:
-
-  # sizeGb: 10
-
-  # mountPath: /data
-
-# Example of an environment group (shared envVars) - optional
-
-envVarGroups:
-
-* name: default-group
-  envVars:
-
-  * key: EXAMPLE_FLAG
-    value: "true"
