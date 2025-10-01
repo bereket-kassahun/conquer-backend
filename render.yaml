@@ -4,8 +4,9 @@ previews:
 # List all services *except* PostgreSQL databases here
 services:
   # A web service on the Ruby native runtime
-  - type: web_service
+  - type: web
     runtime: node
+    plan: free
     name: conquer-backend
     buildCommand: npm install
     startCommand: npm start
