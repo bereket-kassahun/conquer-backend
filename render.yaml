@@ -5,5 +5,5 @@ services:
     runtime: node
     plan: free
     name: conquer-backend
-    buildCommand: npm install
+    buildCommand: npm install && npm run build
     startCommand: npm start
