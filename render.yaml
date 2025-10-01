@@ -1,10 +1,11 @@
+previews:
+  generation: automatic # Enable preview environments
+
+# List all services *except* PostgreSQL databases here
 services:
-  type: web_service
-  name: my-socketio-express-app
-  env: node
-  plan: free
-  repo: https://github.com/bereket-kassahun/conquer-backend
-  branch: main
-  buildCommand: npm install
-  startCommand: npm start
-  envVars:
+  # A web service on the Ruby native runtime
+  - type: web_service
+    runtime: node
+    name: conquer-backend
+    buildCommand: npm install
+    startCommand: npm start
