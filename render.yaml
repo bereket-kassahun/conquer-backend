@@ -1,6 +1,3 @@
-previews:
-  generation: automatic # Enable preview environments
-
 # List all services *except* PostgreSQL databases here
 services:
   # A web service on the Ruby native runtime
