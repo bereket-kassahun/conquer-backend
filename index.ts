@@ -18,36 +18,36 @@ io.on('connection', (socket: Socket) => {
 
   socket.on('message', (msg: string) => {
     console.log('Message:', msg);
-    io.emit('message', msg);
+    socket.emit('message', msg);
   });
 
-  // socket.on('initate', (msg: string) => {
-  //   console.log('Message:', msg);
-  //   io.emit('message', msg);
-  // });
+  socket.on('initate', (msg: string) => {
+    console.log('Message:', msg);
+    socket.emit('message', msg);
+  });
 
-  // socket.on('player1', (msg: string) => {
-  //   // const payload: Payload = parseJson(msg);
-  //   const player = players[0];
-  //   console.log('Message:', msg);
-  //   io.emit('message', JSON.stringify(player));
-  // });
+  socket.on('player1', (msg: string) => {
+    // const payload: Payload = parseJson(msg);
+    const player = players[0];
+    console.log('Message:', msg);
+    socket.emit('message', JSON.stringify(player));
+  });
 
-  // socket.on('player2', (msg: string) => {
-  //   const player = players[1];
-  //   console.log('Message:', msg);
-  //   io.emit('message', JSON.stringify(player));
-  // });
+  socket.on('player2', (msg: string) => {
+    const player = players[1];
+    console.log('Message:', msg);
+    socket.emit('message', JSON.stringify(player));
+  });
 
-  // socket.on('player3', (msg: string) => {
-  //   const player = players[2];
-  //   console.log('Message:', msg);
-  //   io.emit('message', JSON.stringify(player));
-  // });
+  socket.on('player3', (msg: string) => {
+    const player = players[2];
+    console.log('Message:', msg);
+    socket.emit('message', JSON.stringify(player));
+  });
 
   socket.on('player4', (msg: string) => {
     console.log('Message:', msg);
-    io.emit('message', msg);
+    socket.emit('message', msg);
   });
 
   socket.on('disconnect', () => {
