@@ -14,7 +14,7 @@ const io: Server = new Server(server, {
 
 io.on('connection', (socket: Socket) => {
   console.log('User connected:', socket.id);
-  socket.emit('welcome', 'Hello from server!');
+  socket.emit('welcome', socket.id);
 
   socket.on('message', (msg: string) => {
     console.log('Message:', msg);
